@@ -1,14 +1,15 @@
 @import './variables.scss';
 
+// Components
 @import './header.scss';
 @import './footer.scss';
+@import './error404.scss';
+@import './account.scss';
 
+//Pages
 @import './home.scss';
 @import './user.scss';
 @import './login.scss';
-
-@import './account.scss';
-
 
 /* GLOBAL */
 

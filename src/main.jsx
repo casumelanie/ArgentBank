@@ -11,6 +11,8 @@ import User from './pages/User.jsx'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 
+import Error404 from './components/Error404.jsx'
+
 import { store } from './app/store.js'
 import { Provider } from 'react-redux'
 
@@ -22,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/" element={<Home />} />
         <Route path="/sign-in" element={<Login />} />
         <Route path="/user" element={<User />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
     </Router>
