@@ -1,0 +1,22 @@
+#user {
+    flex: 1;
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2rem;
+        h2 {
+            color: $white;
+            font-size: 2em;
+            text-align: center;
+        }
+        .edit-button {
+            border-color: $primary;
+            background-color: $primary;
+            color: $white;
+            font-weight: bold;
+            padding: 10px;
+            width: fit-content;
+        }
+    }
+}
