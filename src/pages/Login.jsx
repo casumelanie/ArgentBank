@@ -2,18 +2,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import { useRef } from 'react'
 import { postLogin } from '../app/api'
+import { useDispatch } from 'react-redux'
+import { setToken } from '../app/authSlice'
+import { useNavigate } from 'react-router-dom'
 
 const LogIn = () => {
-  // Récupération des données et envoi du formulaire
   const form = useRef()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  // Fonction envoi du formulaire
   const submitForm = async (e) => {
     e.preventDefault()
-    let user = {
+    const user = {
       email: form.current[0].value,
       password: form.current[1].value,
     }
 
-    postLogin(user)
+    postLogin(user).then((data) => {
+      // Mise à jour du state, intégration du token
+      dispatch(setToken(data.body.token))
+      // Redirection vers le page utilisateur
+      navigate('/user')
+    })
   }
 
   return (

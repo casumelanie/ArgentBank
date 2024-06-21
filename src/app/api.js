@@ -1,22 +1,18 @@
 // URLS API
 const URL_LOGIN = 'http://localhost:3001/api/v1/user/login'
 
-export const POST_LOGIN = 'POST_LOGIN'
+/*export const POST_LOGIN = 'POST_LOGIN'*/
 
-// METHODE CONNEXION
+// METHODE DE CONNEXION UTILISATEUR
 export const postLogin = (userLogin) => {
-  fetch(URL_LOGIN, {
+  return fetch(URL_LOGIN, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(userLogin),
   })
-    .then((response) => {
-      response.json()
-      console.log(response)
-      // dispatch a rajouter a la suite pour stocker le token
-    })
+    .then((response) => response.json())
     .catch((error) => {
       throw error
     })

@@ -16,6 +16,8 @@ import Error404 from './components/Error404.jsx'
 import { store } from './app/store.js'
 import { Provider } from 'react-redux'
 
+import RequireAuth from './app/RequireAuth.jsx'
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <Router>
@@ -23,8 +25,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign-in" element={<Login />} />
-        <Route path="/user" element={<User />} />
         <Route path="*" element={<Error404 />} />
+        <Route element={<RequireAuth />}>
+          <Route path="/user" element={<User />} />
+        </Route>
       </Routes>
       <Footer />
     </Router>
