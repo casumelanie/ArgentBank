@@ -1,4 +1,9 @@
 import Account from '../components/Account.jsx'
+import { postUser } from '../app/api.js'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectToken } from '../app/authSlice.js'
+import { selectUser, setData } from '../app/userSlice.js'
+import { useEffect } from 'react'
 
 const accounts = [
   {
@@ -22,13 +27,23 @@ const accounts = [
 ]
 
 const User = () => {
+  const token = useSelector(selectToken)
+  const user = useSelector(selectUser)
+  const dispatch = useDispatch()
+
+  {
+    useEffect(() => {
+      postUser(token).then((data) => dispatch(setData(data.body)))
+    }, [dispatch, token])
+  }
+
   return (
     <section id="user" className="bg-dark">
       <div className="header">
         <h2>
           Welcome back
           <br />
-          Tony Jarvis!
+          {user?.userName} {user?.firstName} {user?.lastName}
         </h2>
         <button className="edit-button">Edit Name</button>
         <h2 className="sr-only">Accounts</h2>
