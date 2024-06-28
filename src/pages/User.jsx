@@ -3,6 +3,7 @@ import { postUser } from '../app/api.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectToken } from '../app/authSlice.js'
 import { selectUser, setData } from '../app/userSlice.js'
+import { useEffect } from 'react'
 
 const accounts = [
   {
@@ -27,24 +28,14 @@ const accounts = [
 
 const User = () => {
   const token = useSelector(selectToken)
-  const dispatch = useDispatch()
   const user = useSelector(selectUser)
+  const dispatch = useDispatch()
 
-  setTimeout(() => {
-    {
-      token !== null
-        ? postUser(token).then((data) => {
-            console.log(data)
-            const user = {
-              userName: data.userName,
-              firstName: data.firstName,
-              lastName: data.lastName,
-            }
-            dispatch(setData(user))
-          })
-        : null
-    }
-  }, 1000)
+  {
+    useEffect(() => {
+      postUser(token).then((data) => dispatch(setData(data.body)))
+    }, [dispatch, token])
+  }
 
   return (
     <section id="user" className="bg-dark">
@@ -52,7 +43,7 @@ const User = () => {
         <h2>
           Welcome back
           <br />
-          {user.userName} {user.firstName} {user.lastName}
+          {user?.userName} {user?.firstName} {user?.lastName}
         </h2>
         <button className="edit-button">Edit Name</button>
         <h2 className="sr-only">Accounts</h2>

@@ -8,15 +8,19 @@ import { useSelector } from 'react-redux'
 import { selectToken } from '../app/authSlice'
 import { useDispatch } from 'react-redux'
 import { setToken } from '../app/authSlice'
+import { setData } from '../app/userSlice'
+import { selectUser } from '../app/userSlice'
 
 const Header = ({ logo }) => {
   const token = useSelector(selectToken)
+  const user = useSelector(selectUser)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   // Fonction déconnexion
   const logOut = () => {
     dispatch(setToken(null))
+    dispatch(setData(null))
     navigate('/')
   }
   return (
@@ -29,7 +33,7 @@ const Header = ({ logo }) => {
         <div className="links">
           <Link to="/user" className="link-w-icon">
             <FontAwesomeIcon icon={faCircleUser} />
-            Tony
+            {user?.userName}
           </Link>
           <Link to="/" className="link-w-icon" onClick={(e) => logOut(e)}>
             <FontAwesomeIcon icon={faRightFromBracket} />
