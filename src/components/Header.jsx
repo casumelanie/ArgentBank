@@ -1,20 +1,47 @@
-import { NavLink } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCircleUser,
+  faRightFromBracket,
+} from '@fortawesome/free-solid-svg-icons'
+import { useSelector } from 'react-redux'
+import { selectToken } from '../app/authSlice'
+import { useDispatch } from 'react-redux'
+import { setToken } from '../app/authSlice'
 
 const Header = ({ logo }) => {
+  const token = useSelector(selectToken)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  // Fonction déconnexion
+  const logOut = () => {
+    dispatch(setToken(null))
+    navigate('/')
+  }
   return (
     <header id="header">
       <h1 className="sr-only">Argent Bank</h1>
-
-      <NavLink to="/">
+      <Link to="/">
         <img className="logo" src={logo}></img>
-      </NavLink>
-
-      <NavLink to="/sign-in" className="link-w-icon">
-        <FontAwesomeIcon icon={faCircleUser} />
-        Sign In
-      </NavLink>
+      </Link>
+      {token !== null ? (
+        <div className="links">
+          <Link to="/user" className="link-w-icon">
+            <FontAwesomeIcon icon={faCircleUser} />
+            Tony
+          </Link>
+          <Link to="/" className="link-w-icon" onClick={(e) => logOut(e)}>
+            <FontAwesomeIcon icon={faRightFromBracket} />
+            Sign Out
+          </Link>
+        </div>
+      ) : (
+        <Link to="/sign-in" className="link-w-icon">
+          <FontAwesomeIcon icon={faCircleUser} />
+          Sign In
+        </Link>
+      )}
     </header>
   )
 }

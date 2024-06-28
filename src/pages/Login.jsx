@@ -11,7 +11,7 @@ const LogIn = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // Fonction envoi du formulaire
+  // Fonction connexion
   const submitForm = async (e) => {
     e.preventDefault()
     const user = {
