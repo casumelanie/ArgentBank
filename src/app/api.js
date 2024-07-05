@@ -2,9 +2,7 @@
 const URL_LOGIN = 'http://localhost:3001/api/v1/user/login'
 const URL_USER = 'http://localhost:3001/api/v1/user/profile'
 
-/*export const POST_LOGIN = 'POST_LOGIN'*/
-
-// METHODE DE CONNEXION UTILISATEUR
+// FONCTION DE CONNEXION UTILISATEUR
 export const postLogin = (userLogin) => {
   return fetch(URL_LOGIN, {
     method: 'POST',
@@ -19,7 +17,7 @@ export const postLogin = (userLogin) => {
     })
 }
 
-// METHODE RECUPÉRATION DONNEES UTILISATEUR
+// FONCTION DE RECUPÉRATION DONNÉES UTILISATEUR
 export const postUser = (token) => {
   return fetch(URL_USER, {
     method: 'POST',
@@ -35,16 +33,15 @@ export const postUser = (token) => {
     })
 }
 
-// METHODE ENVOI DONNEES UTILISATEUR
-/*
-export const putUser = (token) => {
+// FONCTION ENVOI NOUVEAU USERNAME
+export const putUserName = (token, userName) => {
   return fetch(URL_USER, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ token }),
+    body: JSON.stringify({ userName }),
   })
     .then((response) => response.json())
     .then((data) => console.log(data))
@@ -53,4 +50,3 @@ export const putUser = (token) => {
       throw error
     })
 }
-    */

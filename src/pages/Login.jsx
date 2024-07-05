@@ -19,12 +19,20 @@ const LogIn = () => {
       password: form.current[1].value,
     }
 
-    postLogin(user).then((data) => {
-      // Mise à jour du state, intégration du token
-      dispatch(setToken(data.body.token))
-      // Redirection vers le page utilisateur
-      navigate('/user')
-    })
+    postLogin(user)
+      .then((data) => {
+        if (data.body && data.body.token) {
+          // Mise à jour du state, intégration du token
+          dispatch(setToken(data.body.token))
+          // Redirection vers le page utilisateur
+          navigate('/user')
+        } else {
+          alert("L'identifiant ou le mot de passe est incorrect")
+        }
+      })
+      .catch((error) => {
+        alert('API non disponible : ' + error.message)
+      })
   }
 
   return (
