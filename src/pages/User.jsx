@@ -55,12 +55,10 @@ const User = () => {
   // Fonction au submit du formulaire
   const changeUsername = (e) => {
     e.preventDefault()
-    // Envoie data nouveau userName
-    putUserName(token, form.current[0].value)
-    // Récupération auprès de l'API du nouveau userData 
-    setTimeout(() => {
-      postUser(token).then((data) => dispatch(setData(data.body)))
-    }, 1000)
+    // Envoie et récupération data nouveau userName
+    putUserName(token, form.current[0].value).then((data) =>
+      dispatch(setData(data.body)),
+    )
     // Fermeture du formulaire
     closeForm()
   }

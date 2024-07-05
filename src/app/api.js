@@ -44,8 +44,6 @@ export const putUserName = (token, userName) => {
     body: JSON.stringify({ userName }),
   })
     .then((response) => response.json())
-    .then((data) => console.log(data))
-
     .catch((error) => {
       throw error
     })
